@@ -123,7 +123,7 @@ if (!empty($snipelist)) {
 						if ($text != false) {
 							$text = preg_split("/\n/",$text);  //in Textarea nicht ben?tigt, nimmt auch \n
 						} else {
-							$text = "<span style=\"color:#FF0000;font-weight:bold;\">Fehler - keine Datei zum Datenbankeintrag gefunden!</span>";
+							$text = array("<span style=\"color:#FF0000;font-weight:bold;\">" . $GLOBALS["tErrorNoFileDbEntry"] . "</span>");
 						}
 				}else{
 						$text = preg_split("/\n/",$snipe->text);
@@ -139,7 +139,7 @@ if (!empty($snipelist)) {
 							<img src="http://thumbs.ebaystatic.com/pict/<?=$artnr?>8080_0.jpg" />
 					</div>
 		  </td>
-			<td colspan="4"><a href="http://cgi.ebay.de/ws/eBayISAPI.dll?ViewItem&item=<?=$artnr?>&rd=1" title="<?=implode("<br />",array_slice($text,-10))?>"><?=$artnr?>: <?=preg_replace("/Auction[ ][0-9]+:/","",$text[0])?></a></td>
+			<td colspan="4"><a href="http://cgi.<?=$GLOBALS["tEbayUrl"]?>/ws/eBayISAPI.dll?ViewItem&item=<?=$artnr?>&rd=1" title="<?=implode("<br />",array_slice($text,-10))?>"><?=$artnr?>: <?=preg_replace("/Auction[ ][0-9]+:/","",$text[0])?></a></td>
 			</td>
 		<?php if($zutun != 6): ?>
 			<td>
@@ -159,11 +159,11 @@ if (!empty($snipelist)) {
 				}
 				?>
 			</td>
-			<td style="color: gray">&euro; <?=$snipe->highestBid?><?=isset($snipe->shipping)?" ".$snipe->shipping:""?></td>
+			<td style="color: gray"><?=$GLOBALS["tCurrencySign"]?> <?=$snipe->highestBid?><?=isset($snipe->shipping)?" ".$snipe->shipping:""?></td>
 			<td>
 		<?php if($snipe->status >= 0): ?>
 				<?=html_snipestatus($snipe->status)?>
-				<span style="color:<?=($snipe->bid > $snipe->highestBid)?"#85b716":"#e43137"?>">&euro; <?=$snipe->bid?></span>
+				<span style="color:<?=($snipe->bid > $snipe->highestBid)?"#85b716":"#e43137"?>"><?=$GLOBALS["tCurrencySign"]?> <?=$snipe->bid?></span>
 				<span style="color:gray">(PID: <span style='color:<?=snipeRunCheck($snipe->pid)?"#85b716":"#e43137"?>'><?=$snipe->pid?></span>)</span>
 		<?php elseif($zutun == 6): ?>
 				<?php
@@ -173,8 +173,8 @@ if (!empty($snipelist)) {
 								$sells = array_key_exists(2,$seller)?$seller[2]:"";
 				?>
 				<span style="color:gray">
-						<a href="http://www.ebay.de/usr/<?=$sellerID?>" target="_blank"><?=$sellerID?></a> | 
-						<a href="http://feedback.ebay.de/ws/eBayISAPI.dll?ViewFeedback2&userid=<?=$sellerID?>" target="_blank"><?=$sells?></a> |
+						<a href="http://www.<?=$GLOBALS["tEbayUrl"]?>/usr/<?=$sellerID?>" target="_blank"><?=$sellerID?></a> | 
+						<a href="http://feedback.<?=$GLOBALS["tEbayUrl"]?>/ws/eBayISAPI.dll?ViewFeedback2&userid=<?=$sellerID?>" target="_blank"><?=$sells?></a> |
 						<?=$reputation?>
 				</span>
 				<?php
@@ -187,14 +187,14 @@ if (!empty($snipelist)) {
 				<form action="index.php" method="get" class="changer">
 					<input type="hidden" name='zutun' value='2' />
 					<input type="hidden" name="artnr" value="<?=$artnr?>" />
-					<input type="text" name="bid" value="<?=$snipe->bid?>" oldvalue="<?=$snipe->bid?>" size="6" placeholder="Gebot ..." />
+					<input type="text" name="bid" value="<?=$snipe->bid?>" oldvalue="<?=$snipe->bid?>" size="6" placeholder="<?=$GLOBALS["tBid"]?> ..." />
 					<?=html_gruppenliste($snipe->artnr,$db)?>
 					<input type="submit" value="&crarr;" />
 				</form>
 		<?php else: ?>
 				<form action="add.php" method="get" class="adder">
 						<input type="hidden" name="artnr" value="<?=$artnr?>" />
-						<input type="text" name="bid" value="<?=$snipe->bid?>" size="6" placeholder="Gebot ..." />
+						<input type="text" name="bid" value="<?=$snipe->bid?>" size="6" placeholder="<?=$GLOBALS["tBid"]?> ..." />
 						<?php if($snipe->status < 0): ?>
 						<select name="gruppe" size="1">
 								<?=html_GruppenlisteNeuerArt($db)?>
@@ -208,7 +208,7 @@ if (!empty($snipelist)) {
 			</td>
 		<?php if($zutun != 6): ?>
 			<td>
-				<a href="index.php?zutun=1&delete=<?=$artnr?>" style="text-decoration: none;"><span style="color: #e43137;">X</span> löschen</a>
+				<a href="index.php?zutun=1&delete=<?=$artnr?>" style="text-decoration: none;"><span style="color: #e43137;">X</span> <?=$GLOBALS["tErase"]?></a>
 			</td>
 		<?php endif ?>
 		</tr>

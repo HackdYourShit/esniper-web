@@ -27,7 +27,9 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-require_once 'config.inc';
+require_once 'config.inc.php';
+
+$GLOBALS["tEbayUrl"] = "ebay.com";
 
 switch(LANG) {
 	case 1:
@@ -68,6 +70,22 @@ switch(LANG) {
 	$GLOBALS["tAuktionsNr"] = 'Auktionsnnummer';
 	$GLOBALS["tHoechstgebot"] = 'Höchstgebot';
 	
+	$GLOBALS["tBid"] = 'Gebot';
+	$GLOBALS["tAnumUrl"] = 'Artikel Nummer oder URL';
+	$GLOBALS["tSelectCat4Search"] = 'Wählen Sie eine Kategorie für die Suche aus';
+	$GLOBALS["tWatchlist"] = 'Beobachtungsliste';
+	$GLOBALS["tGroup"] = 'Gruppen';
+	$GLOBALS["tFilterGroup"] = 'Gruppe filtern';
+	$GLOBALS["tCleanupAuctions"] = 'Auktionen aufräumen';
+	$GLOBALS["tCleanUp"] = 'Aufräumen';
+	$GLOBALS["tSnipeAnArticle"] = 'Snipe einen Artikel'; // Snipe an article
+	$GLOBALS["tSnipeAllArticle"] = 'Snipe alle Artikel'; // Snipe all Article
+	$GLOBALS["tNotes"] = 'Notizen';
+	$GLOBALS["tErase"] = 'löschen';
+	$GLOBALS["tErrorNoFileDbEntry"] = 'Fehler - keine Datei zum Datenbankeintrag gefunden!';
+
+	$GLOBALS["tCurrencySign"] = '&euro;';
+	$GLOBALS["tEbayUrl"] = "ebay.de";
 	$GLOBALS["pMenue"] = "menue-d.gif";
 	break;
 	case 2:
@@ -107,7 +125,23 @@ switch(LANG) {
 	$GLOBALS["tArtikelDaten"] = 'auction informations';
 	$GLOBALS["tAuktionsNr"] = 'auctionnumer';
 	$GLOBALS["tHoechstgebot"] = 'highest bid';
-	
+
+	$GLOBALS["tBid"] = 'Bid';
+	$GLOBALS["tAnumUrl"] = 'Article number or URL';
+	$GLOBALS["tSelectCat4Search"] = 'Select a category for the search';
+	$GLOBALS["tWatchlist"] = 'Watchlist';
+	$GLOBALS["tGroup"] = 'Group';
+	$GLOBALS["tFilterGroup"] = 'Filter group';
+	$GLOBALS["tCleanupAuctions"] = 'Clean up auctions';
+	$GLOBALS["tCleanUp"] = 'Clean up';
+	$GLOBALS["tSnipeAnArticle"] = 'Snipe an article';
+	$GLOBALS["tSnipeAllArticle"] = 'Snipe all Article';
+	$GLOBALS["tNotes"] = 'Notes';
+	$GLOBALS["tErase"] = 'Erase';
+	$GLOBALS["tErrorNoFileDbEntry"] = 'Error - no file found for database entry!';
+
+	$GLOBALS["tCurrencySign"] = '$';
+	$GLOBALS["tEbayUrl"] = "ebay.com";
 	$GLOBALS["pMenue"] = "menue-e.gif";
 }
 ?>

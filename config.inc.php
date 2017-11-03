@@ -8,7 +8,7 @@ define("PATH_TO_ESNIPER", "/usr/local/bin/esniper"); //Pfad zu esniper inkl. Dat
 define("PATH_TO_ESNIPERCONFIG", "/var/www/snyp/esniper.cfg"); //Pfad zur esniper config inkl. Dateiname
 define("TMP_FOLDER","/var/www/snyp/tmp"); //Pfad zum tempor�ren Ordner
 //German 1
-define("LANG",1);
+define("LANG",2);
 //English 2
 //</Konfigurationsabschnitt>
 ?>

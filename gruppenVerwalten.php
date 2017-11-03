@@ -37,45 +37,51 @@ $nureins = $_GET["nureins"];
 $zutun = $_GET["zutun"];
 $gid = $_GET["gid"];
 
+function my_escape_string($value)
+{
+    $search = array("\\",  "\x00", "\n",  "\r",  "'",  '"', "\x1a");
+    $replace = array("\\\\","\\0","\\n", "\\r", "\'", '\"', "\\Z");
 
+    return str_replace($search, $replace, $value);
+}
 
 switch($zutun) {
     Case 1:
     if ($name != "") {
         $sql = "INSERT INTO gruppen (name,notizen,farbe,nureins) VALUES ('".
-						mysql_real_escape_string($name)."','".
-						mysql_real_escape_string($notizen)."','".
-						mysql_real_escape_string($farbe)."','".
-						mysql_real_escape_string($nureins)."')";
+						my_escape_string($name)."','".
+						my_escape_string($notizen)."','".
+						my_escape_string($farbe)."','".
+						my_escape_string($nureins)."')";
         $db->query($sql);
     }
     break;
     Case 2:
     if ($gid != "") {
         $sql = "UPDATE gruppen SET name = '".
-						mysql_real_escape_string($name)."',
+						my_escape_string($name)."',
 						notizen = '".
-						mysql_real_escape_string($notizen)."',
+						my_escape_string($notizen)."',
 						farbe = '".
-						mysql_real_escape_string($farbe)."',
+						my_escape_string($farbe)."',
 						nureins = '".
-						mysql_real_escape_string($nureins)."'
+						my_escape_string($nureins)."'
 						WHERE gruppeID = '".
-						mysql_real_escape_string($gid)."'";
+						my_escape_string($gid)."'";
         $db->query($sql);
     }
     break;
     Case 3:
     if ($gid != "") {
-				$sql = "UPDATE snipe SET gruppe = 0 WHERE gruppe = '".mysql_real_escape_string($gid)."'";
+				$sql = "UPDATE snipe SET gruppe = 0 WHERE gruppe = '".my_escape_string($gid)."'";
 				$db->query($sql);
-				$sql = "DELETE FROM gruppen WHERE gruppeID = '".mysql_real_escape_string($gid)."'";
+				$sql = "DELETE FROM gruppen WHERE gruppeID = '".my_escape_string($gid)."'";
 				$db->query($sql);
     }
     break;
 }
 if($zutun != 3 && $name != ""){
-		$gruppe = $db->get_row("SELECT * FROM gruppen WHERE name = '".mysql_real_escape_string($name)."'");
+		$gruppe = $db->get_row("SELECT * FROM gruppen WHERE name = '".my_escape_string($name)."'");
 		?>
 		<tr class="mainrow">
 				<td>

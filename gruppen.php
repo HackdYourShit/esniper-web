@@ -79,8 +79,8 @@ $( document ).ready(function() {
 						var that = $(this);
 						
 						that.switchButton({
-								on_label: 'Snipe einen Artikel',
-								off_label: 'Snipe alle Artikel',
+								on_label: '<?=$GLOBALS["tSnipeAnArticle"]?>',
+								off_label: '<?=$GLOBALS["tSnipeAllArticle"]?>',
 								labels_placement: "right",
 								checked: ((typeof that.attr("checked") !== 'undefined' && that.attr("checked") !== false)?true:false)
 						});
@@ -143,7 +143,7 @@ $( document ).ready(function() {
 														<input type="color" name="farbe" value="#0063d1" />
 												</td>
 												<td style="width:156px;"><input type="text" name="name" value="" placeholder="Name ..." style="width:150px;" /></td>
-												<td><input type="text" name="notizen" value="" placeholder="Notizen ..." style="width:100%;" /></td>
+												<td><input type="text" name="notizen" value="" placeholder="<?=$GLOBALS["tNotes"]?> ..." style="width:100%;" /></td>
 												<td style="width:160px;"><div class="switch-wrapper"><input type="checkbox" value="0" name="nureins" /></div></td>
 												<td style="width:60px; text-align:right;">
 														<button class="button-add ui-color-green" title="Speichern">Speichern</button>

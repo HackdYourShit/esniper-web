@@ -87,18 +87,18 @@ $( document ).ready(function() {
 																				<div id="gh-ac-box" class="">
 																						<div id="gh-ac-box2">
 																								<label for="gh-ac" class="gh-hdn g-hdn">Geben Sie Ihren Suchbegriff ein</label>
-																								<input type="text" class="gh-tb ui-autocomplete-input" size="50" maxlength="300" placeholder="Artikel Nummer oder URL ..." id="gh-ac" name="artnr" autocomplete="off">
+																								<input type="text" class="gh-tb ui-autocomplete-input" size="50" maxlength="300" placeholder="<?=$GLOBALS["tAnumUrl"]?> ..." id="gh-ac" name="artnr" autocomplete="off">
 																						</div>
 																				</div>
 																		</td>
 																		<td id="gh-bid-td" class="gh-td">
 																				<div id="gh-bid-box">
-																						<input type="text" class="gh-tb ui-autocomplete-input" size="7" maxlength="10" placeholder="Gebot ..." id="gh-bid" name="bid" autocomplete="off">
+																						<input type="text" class="gh-tb ui-autocomplete-input" size="7" maxlength="10" placeholder="<?=$GLOBALS["tBid"]?> ..." id="gh-bid" name="bid" autocomplete="off">
 																				</div>
 																		</td>
 																		<td id="gh-cat-td" class="gh-td">
 																				<div id="gh-cat-box">
-																						<select title="Wählen Sie eine Kategorie für die Suche aus" class="gh-sb" size="1" id="gh-cat" name="gruppe">
+																						<select title="<?=$GLOBALS["tSelectCat4Search"]?>" class="gh-sb" size="1" id="gh-cat" name="gruppe">
 																								<?=html_GruppenlisteNeuerArt($db)?>
 																						</select>
 																				</div>
@@ -189,10 +189,10 @@ switch($zutun) {
 																		<td class="bstab-<?=($zutun != 6 && $zutun != 7)?"act":"i"?>Rgt"><a class="bstab-padd" href="index.php">Snipes</a></td>
 																		<td class="bstab-dummy">&nbsp;</td>
 																		<td class="bstab-<?=($zutun == 6)?"act":"i"?>Lft"></td>
-																		<td class="bstab-<?=($zutun == 6)?"act":"i"?>Rgt"><a class="bstab-padd" href="index.php?zutun=6">Beobachtungsliste</a></td>
+																		<td class="bstab-<?=($zutun == 6)?"act":"i"?>Rgt"><a class="bstab-padd" href="index.php?zutun=6"><?=$GLOBALS["tWatchlist"]?></a></td>
 																		<td class="bstab-dummy">&nbsp;</td>
 																		<td class="bstab-<?=($zutun == 7)?"act":"i"?>Lft"></td>
-																		<td class="bstab-<?=($zutun == 7)?"act":"i"?>Rgt"><a class="bstab-padd" href="index.php?zutun=7">Gruppen</a></td>
+																		<td class="bstab-<?=($zutun == 7)?"act":"i"?>Rgt"><a class="bstab-padd" href="index.php?zutun=7"><?=$GLOBALS["tGroup"]?></a></td>
 																		<td class="bstab-dummy">&nbsp;</td>
 																</tr>
 														</tbody>
@@ -208,7 +208,7 @@ if($zutun == "" || in_array($zutun, range(1,5))){
 		} else {
 			printf(html_GruppenFilternListe(-1,$db));
 		}
-		printf("<input type=\"submit\" value=\"Gruppe filtern\">");
+		printf("<input type=\"submit\" value=\"" . $GLOBALS["tFilterGroup"] . "\">");
 		printf("<input type=\"hidden\" name=\"zutun\" value=\"4\">");
 		if ($filtergruppe >= 0 && $zutun==4) {
 			$sql="SELECT count(*) FROM snipe WHERE gruppe = \"".$filtergruppe."\"";
@@ -237,7 +237,7 @@ if($zutun == "" || in_array($zutun, range(1,5))){
 
 		?>
 														<big style="color:black">|</big> 											
-														<a href="index.php?zutun=3" title="Auktionen aufräumen">Aufräumen</a>
+														<a href="index.php?zutun=3" title="<?=$GLOBALS["tCleanupAuctions"]?>"><?=$GLOBALS["tCleanUp"]?></a>
 												<?php
 }
 												?>

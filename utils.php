@@ -26,13 +26,14 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-require_once 'config.inc';
-require_once 'ez_sql.php';
+require_once 'config.inc.php';
+require_once 'ez_sql_core.php';
+require_once 'ez_sql_mysqli.php';
 require_once 'phpLinkCheck.php';
 
 global $db;
-$db = new db(EZSQL_DB_USER, EZSQL_DB_PASSWORD, EZSQL_DB_NAME, EZSQL_DB_HOST);
-if(!$db->alive()) die();
+$db = new ezSQL_mysqli(EZSQL_DB_USER, EZSQL_DB_PASSWORD, EZSQL_DB_NAME, EZSQL_DB_HOST);
+//if(!$db->alive()) die();
 
 function genAuctionfile($artnr,$bid) {
     $fn=TMP_FOLDER."/".$artnr.".ebaysnipe";
@@ -237,7 +238,8 @@ function killSniper($artnr,$db) {
     if (snipeRunCheck($snipe->pid) == true) {
         //Sicherheitsabfrag eeinbauen, ob PID auch ein esniper Programm
 				//	printf("Sniperprozess mit PID ".$snipe->pid."beendet.");
-				exec("kill -15 ".getEsniperPid($snipe->pid));
+        //printf("KILLSNIPER: kill -9 -15 ".getEsniperPid($snipe->pid));
+				exec("kill -9 -15 ".getEsniperPid($snipe->pid));
     }
     exec("rm \"".TMP_FOLDER."/".$artnr.".*\"");
 }
@@ -293,7 +295,7 @@ function fileList($dir) {
 
 function getLogData($artnr) {
 	$fn=TMP_FOLDER."/".$artnr.".ebaysnipelog";
-	if (file_exists($fn)) {
+	if (file_exists($fn) && filesize ($fn) > 0) {
 		$fp=fopen($fn,"r");
 		$text=fread($fp, filesize ($fn));
 		fclose($fp);
